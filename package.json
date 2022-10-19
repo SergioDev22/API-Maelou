@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  },
+  "name": "api-maelou",
+  "description": "C'est des APIs pour l'application Maelou",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergioDev22/API-Maelou.git"
+  },
+  "author": "RAKOTOARISOA Louis Sergio (SergioDev22)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SergioDev22/API-Maelou/issues"
+  },
+  "homepage": "https://github.com/SergioDev22/API-Maelou#readme"
+}
