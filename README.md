@@ -51,21 +51,20 @@ C'est des APIs pour l'application Maelou
   </details>
 
 - <details>
-        <summary>Response (200)</summary>
+    <summary>Response (200)</summary>
 
-        ```json
-          {
-
-              "message": "User registered successfully!",
-              "data": {
-                  "id": <id>,
-                  "nom": <nom de l'utilisateur> ,
-                  "prenom": <prénom de l'utilisateur>,
-                  "adresse": <adresse de l'utilisateur>,
-                  "token": <token>
-              }
-          }
-        ```
+  ```json
+    {
+        "message": "User registered successfully!",
+        "data": {
+            "id": <id>,
+            "nom": <nom de l'utilisateur> ,
+            "prenom": <prénom de l'utilisateur>,
+            "adresse": <adresse de l'utilisateur>,
+            "token": <token>
+        }
+    }
+  ```
 
     </details>
 
@@ -88,21 +87,21 @@ C'est des APIs pour l'application Maelou
   </details>
 
 - <details>
-        <summary>Response (200)</summary>
+    <summary>Response (200)</summary>
 
-        ```json
-          {
+  ```json
+    {
 
-              "message": "User logged in successfully!",
-              "data": {
-                  "id": <id>,
-                  "nom": <nom de l'utilisateur> ,
-                  "prenom": <prénom de l'utilisateur>,
-                  "adresse": <adresse de l'utilisateur>,
-                  "token": <token>
-              }
-          }
-        ```
+        "message": "User logged in successfully!",
+        "data": {
+            "id": <id>,
+            "nom": <nom de l'utilisateur> ,
+            "prenom": <prénom de l'utilisateur>,
+            "adresse": <adresse de l'utilisateur>,
+            "token": <token>
+        }
+    }
+  ```
 
     </details>
 
