@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `alerte` (
   `latitude` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `id_Utilisateur` int NOT NULL,
   `id_Type` int NOT NULL,
-  `id_Status` int NOT NULL,
+  `id_Status` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `Alerte_Utilisateur_FK` (`id_Utilisateur`),
   KEY `Alerte_Type0_FK` (`id_Type`),
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `alerte` (
   CONSTRAINT `Alerte_Status1_FK` FOREIGN KEY (`id_Status`) REFERENCES `status` (`id`),
   CONSTRAINT `Alerte_Type0_FK` FOREIGN KEY (`id_Type`) REFERENCES `type` (`id`),
   CONSTRAINT `Alerte_Utilisateur_FK` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
