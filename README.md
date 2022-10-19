@@ -1,6 +1,6 @@
 # API-Maelou
 
-C'est des APIs pour l'application Maelou
+Ce sont des APIs pour l'application Maelou
 
 # Installation
 
@@ -27,7 +27,52 @@ C'est des APIs pour l'application Maelou
 
 # Documentations
 
-### Pour les utilsateurs
+### Les utilitaires :
+
+Ce sont les routes pour les utils nécessaires afin de faire jouer avec les utilsateurs
+
+<details>
+<summary>les types d'alerte</summary>
+
+- <details>
+  <summary>Request</summary>
+
+  ```http
+  GET <host>:<port>/api/v1/utils/alerte-type
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+    [
+        {
+          "id": <id>,
+          "nom": <nom du type d'alerte>,
+          "description": <description de ce type>
+        },
+        {
+          "id": <id>,
+          "nom": <nom du type d'alerte>,
+          "description": <description de ce type>
+        },
+        {
+          "id": <id>,
+          "nom": <nom du type d'alerte>,
+          "description": <description de ce type>
+        }
+    ]
+  ```
+
+    </details>
+
+  </details>
+
+<br >
+
+### Les utilsateurs
 
 <details>
 <summary>Inscription ou Registration</summary>
@@ -100,6 +145,46 @@ C'est des APIs pour l'application Maelou
             "adresse": <adresse de l'utilisateur>,
             "token": <token>
         }
+    }
+  ```
+
+    </details>
+
+  </details>
+
+<br >
+
+### Alertes
+
+<details>
+<summary> Envoyer un alerte </summary>
+
+- <details>
+  <summary>Request</summary>
+  id_Type : Type d'alerte dans utilitaire
+
+  ```http
+  POST <host>:<port>/api/v1/alert/send
+  Authorization: Bearer <token>
+
+  {
+    "longitude": string | required,
+    "latitude": string | required,
+    "id_Utilisateur": number | required,
+    "id_Type": number | required ,
+  }
+
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+    {
+      "id": <id de l'alerte dans bdd>,
+      "message": "Alert sended succesfuly!"
     }
   ```
 
