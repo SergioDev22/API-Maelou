@@ -114,7 +114,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 ## Les services des utilisateurs simples
 
-#### Les utilsateurs
+#### Registration et login
 
 <details>
 <summary>Inscription ou Registration</summary>
@@ -122,7 +122,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 - <details>
   <summary>Request</summary>
 
-  NB : Pour prendre en compte le PDC de l'utilsateur,
+  **NB** : Pour prendre en compte le PDC de l'utilsateur,
   Il faut envoyer les données en `multipart/form-data`
   avec le champ de la photo nommé "pdc"
 
@@ -214,8 +214,6 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
   </details>
 
-<br >
-
 #### Alertes
 
 <details>
@@ -223,7 +221,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 - <details>
   <summary>Request</summary>
-  id_Type : Type d'alerte dans utilitaire
+  **id_Type** : Type d'alerte dans utilitaire
 
   ```http
   POST <host>:<port>/api/v1/alert
@@ -254,6 +252,94 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
   </details>
 
 ## Les services des ADMIN
+
+#### Registration et login
+
+<details>
+<summary>Inscription ou Registration</summary>
+
+- <details>
+  <summary>Request</summary>
+
+  **NB : Cet action a besoin d'un pouvoir super Admin(isSuper===true)**
+
+  ```http
+  POST <host>:<port>/api/v1/admin/register
+  {
+    "nom": string | required,
+    "prenom": string | required,
+    "grade": string | required,
+    "poste": string | required,
+    "nom_utilisateur": string | required,
+    "mot_de_passe": string | required,
+    "isSuper": boolean | NOT required,
+
+  }
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+    {
+      "message": "Admin registered successfully!",
+      "id": <id>,
+      "data": {
+        "nom": <nom>,
+        "prenom": <prénom>,
+        "grade": <grade>,
+        "poste": <poste>,
+        "nom_utilisateur": <nom_utilisateur>,
+        "isSuper": false
+      },
+      "token": <token>
+    }
+  ```
+
+    </details>
+
+  </details>
+
+<details>
+<summary>Connexion ou login </summary>
+
+- <details>
+  <summary>Request</summary>
+
+  ```http
+  POST <host>:<port>/api/v1/admin/login
+  {
+    "nom_utilisateur": string | required,
+    "mot_de_passe": string | required,
+  }
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+    {
+      "message": "Admin registered successfully!",
+      "id": <id>,
+      "data": {
+        "nom": <nom>,
+        "prenom": <prénom>,
+        "grade": <grade>,
+        "poste": <poste>,
+        "nom_utilisateur": <nom_utilisateur>,
+        "isSuper": false
+      },
+      "token": <token>
+    }
+  ```
+
+    </details>
+
+  </details>
 
 #### Alertes
 
@@ -335,7 +421,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 - <details>
   Cet API permet de changer le status d'Alerte
-  NB : les types de status sont vu aux utilitaires
+  **NB** : les types de status sont vu aux utilitaires
   <summary>Request</summary>
 
   ```http
