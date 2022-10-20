@@ -5,7 +5,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         ` 
-            INSERT INTO Utilisateur (nom, prenom, cin, facebook, adresse, nom_utilisateur, mot_de_passe)
+            INSERT INTO Utilisateur (nom, prenom, cin,
+            facebook, adresse, nom_utilisateur, mot_de_passe)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         `,
         [
@@ -18,11 +19,8 @@ module.exports = {
           data.mot_de_passe,
         ],
         (err, result) => {
-          if (!err) {
-            resolve(result);
-          } else {
-            reject(err);
-          }
+          if (err) reject(err);
+          resolve(result);
         }
       );
     });
@@ -36,11 +34,8 @@ module.exports = {
         `,
         [nom_utilisateur],
         (err, result) => {
-          if (!err) {
-            resolve(result);
-          } else {
-            reject(err);
-          }
+          if (err) reject(err);
+          resolve(result);
         }
       );
     });

@@ -2,7 +2,7 @@
 
 Ce sont des APIs pour l'application Maelou
 
-# Installation
+## INSTALLATION
 
 - #### Etape 1 :
 
@@ -25,14 +25,14 @@ Ce sont des APIs pour l'application Maelou
 - #### Etape 5 :
   Il est le temps de demmarer notre application à l'aide du commande `nodemon server.js`
 
-# Documentations
+## DOCUMENTATIONS
 
-### Les utilitaires :
+#### Les utilitaires :
 
 Ce sont les routes pour les utils nécessaires afin de faire jouer avec les utilsateurs
 
 <details>
-<summary>les types d'alerte</summary>
+<summary>les types d'Alerte</summary>
 
 - <details>
   <summary>Request</summary>
@@ -70,9 +70,51 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
   </details>
 
+<details>
+<summary>les types de Status</summary>
+
+- <details>
+  <summary>Request</summary>
+
+  ```http
+  GET <host>:<port>/api/v1/utils/status-type
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+  [
+    {
+      "id": 1,
+      "nom": "NOUVEAU"
+    },
+    {
+      "id": 2,
+      "nom": "PRISE"
+    },
+    {
+      "id": 3,
+      "nom": "EN PROGRES"
+    },
+    {
+      "id": 4,
+      "nom": "EN ATTENTE"
+    }
+  ]
+  ```
+
+    </details>
+
+  </details>
+
 <br >
 
-### Les utilsateurs
+### Les services des utilisateurs simples
+
+#### Les utilsateurs
 
 <details>
 <summary>Inscription ou Registration</summary>
@@ -154,7 +196,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 <br >
 
-### Alertes
+#### Alertes
 
 <details>
 <summary> Envoyer un alerte </summary>
@@ -164,14 +206,13 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
   id_Type : Type d'alerte dans utilitaire
 
   ```http
-  POST <host>:<port>/api/v1/alert/send
+  POST <host>:<port>/api/v1/alert
   Authorization: Bearer <token>
 
   {
     "longitude": string | required,
     "latitude": string | required,
-    "id_Utilisateur": number | required,
-    "id_Type": number | required ,
+    "id_Utilisateur": number | required
   }
 
   ```
@@ -186,6 +227,146 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
       "id": <id de l'alerte dans bdd>,
       "message": "Alert sended succesfuly!"
     }
+  ```
+
+    </details>
+
+  </details>
+
+## Les services des ADMIN
+
+#### Alertes
+
+<details>
+<summary> Geter les alertes et leurs historiques  non términées </summary>
+
+- <details>
+  <summary>Request</summary>
+
+  ```http
+  GET <host>:<port>/api/v1/alert
+  Authorization: Bearer <token_admin>
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+    [
+      {
+        "id":<id_Alert> ,
+        "people": {
+          "id": <id_de_la_personne_sender>,
+          "nom": <son_nom>,
+          "prenom": <son_prenom>,
+          "cin": <son_cin>,
+          "facebook": <son_pseudo_fb>,
+          "adresse": <son_adresse>
+        },
+        "content": {
+          "date_post": <date_post_d_alerte>,
+          "longitude": <son_longitude>,
+          "latitude": <son_latitude>
+        },
+        "type_Alert": {
+          "id": <id_type_alerte>,
+          "nom": <son_nom>
+        },
+        "status_Alert": {
+          "id": <id_status_alerte>,
+           "nom": <son_nom>
+        }
+      },
+      {
+        "id":<id_Alert> ,
+        "people": {
+          "id": <id_de_la_personne_sender>,
+          "nom": <son_nom>,
+          "prenom": <son_prenom>,
+          "cin": <son_cin>,
+          "facebook": <son_pseudo_fb>,
+          "adresse": <son_adresse>
+        },
+        "content": {
+          "date_post": <date_post_d_alerte>,
+          "longitude": <son_longitude>,
+          "latitude": <son_latitude>
+        },
+        "type_Alert": {
+          "id": <id_type_alerte>,
+          "nom": <son_nom>
+        },
+        "status_Alert": {
+          "id": <id_status_alerte>,
+           "nom": <son_nom>
+        }
+      }
+    ]
+  ```
+
+    </details>
+
+  </details>
+
+<details>
+<summary> Changer le status d'alerte </summary>
+
+- <details>
+  Cet API permet de changer le status d'Alerte
+  NB : les types de status sont vu aux utilitaires
+  <summary>Request</summary>
+
+  ```http
+  PATCH <host>:<port>/api/v1/alert/<id_Alerte>
+  Authorization: Bearer <token_admin>
+
+  {
+    "id_Admin" : <id_Admin>,
+    "id_Status": <id_Status_pour_le_changement>
+  }
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+  {
+    "message": "Alert status changed succesfuly for   Alert <id_Alerte>"
+  }
+  ```
+
+    </details>
+
+  </details>
+
+<details>
+<summary> Marquer l'alerte comme Términé, c'est-a-dire PROBLEME RESOLU </summary>
+
+- <details>
+  <summary>Request</summary>
+
+  ```http
+  PATCH <host>:<port>/api/v1/alert/close/<id_Alerte>
+  Authorization: Bearer <token_admin>
+
+  {
+    "id_Admin" : <id_Admin>
+  }
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+  {
+    "message": "Alert status changed \"TERMINE\" succesfuly for Alert 3"
+  }
   ```
 
     </details>
