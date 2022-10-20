@@ -27,7 +27,7 @@ Ce sont des APIs pour l'application Maelou
 
 ## DOCUMENTATIONS
 
-#### Les utilitaires :
+## Les utilitaires :
 
 Ce sont les routes pour les utils nécessaires afin de faire jouer avec les utilsateurs
 
@@ -112,7 +112,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 <br >
 
-### Les services des utilisateurs simples
+## Les services des utilisateurs simples
 
 #### Les utilsateurs
 
