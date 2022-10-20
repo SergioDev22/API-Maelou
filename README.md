@@ -122,6 +122,26 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 - <details>
   <summary>Request</summary>
 
+  NB : Pour prendre en compte le PDC de l'utilsateur,
+  Il faut envoyer les données en `multipart/form-data`
+  avec le champ de la photo nommé "pdc"
+
+  ```http
+  POST <host>:<port>/api/v1/user/register
+  formdata(
+    "nom": string | required,
+    "prenom": string | required,
+    "facebook": string | required,
+    "cin": string | NOT required,
+    "adresse": string | required,
+    "nom_utilisateur": string | required,
+    "mot_de_passe": string | required,
+    "pdc": file | NOT required,
+  )
+  ```
+
+  Sinon, Envoyer tout simplement les données en `json`
+
   ```http
   POST <host>:<port>/api/v1/user/register
   {

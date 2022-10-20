@@ -4,6 +4,7 @@ const generateToken = require("./../service/token");
 
 module.exports = {
   register: (req, res) => {
+    const pdc = req.file;
     const data = req.body;
 
     // Verifier si le BODY de l'API n'est pas vide
@@ -62,7 +63,15 @@ module.exports = {
 
         // Enregistrer l'utilisateur dans la base de données
         userModel
-          .register(data)
+          .register({
+            ...data,
+            pdcUrl:
+              pdc !== undefined
+                ? `${req.protocol}://${req.get("host")}/pdc/${
+                    req.file.filename
+                  }`
+                : null,
+          })
           .then((result) => {
             // Tant que l'utilisateur est enregistré dans la base de données
             // Faut la retourner les information de connexion de l'utilisateur

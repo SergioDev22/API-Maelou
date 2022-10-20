@@ -6,8 +6,8 @@ module.exports = {
       db.query(
         ` 
             INSERT INTO Utilisateur (nom, prenom, cin,
-            facebook, adresse, nom_utilisateur, mot_de_passe)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            facebook, adresse, nom_utilisateur, mot_de_passe, pdcUrl)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `,
         [
           data.nom,
@@ -17,6 +17,7 @@ module.exports = {
           data.adresse,
           data.nom_utilisateur,
           data.mot_de_passe,
+          data.pdcUrl,
         ],
         (err, result) => {
           if (err) reject(err);
