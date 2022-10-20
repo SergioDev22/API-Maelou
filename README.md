@@ -365,7 +365,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
   ```json
   {
-    "message": "Alert status changed \"TERMINE\" succesfuly for Alert 3"
+    "message": "Alert status changed \"TERMINE\" succesfuly for Alert <id_Alerte>"
   }
   ```
 
