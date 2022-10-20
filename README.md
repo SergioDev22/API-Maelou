@@ -221,7 +221,8 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 - <details>
   <summary>Request</summary>
-  **id_Type** : Type d'alerte dans utilitaire
+  
+  *id_Type* : Type d'alerte dans utilitaire
 
   ```http
   POST <host>:<port>/api/v1/alert
