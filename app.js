@@ -1,8 +1,10 @@
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user");
 const utilsRoutes = require("./routes/utils");
 const alertRoutes = require("./routes/alert");
+const adminRoutes = require("./routes/admin");
 
 const app = express();
 
@@ -21,8 +23,11 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/utils", utilsRoutes);
 app.use("/api/v1/alert", alertRoutes);
+app.use("/api/v1/admin", adminRoutes);
+app.use("/pdc", express.static(path.join(__dirname, "pdc")));
 
 module.exports = app;

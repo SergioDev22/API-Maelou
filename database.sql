@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `nom_utilisateur` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `mdp` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -39,10 +39,13 @@ CREATE TABLE IF NOT EXISTS `admin` (
 DROP TABLE IF EXISTS `alerte`;
 CREATE TABLE IF NOT EXISTS `alerte` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `date_post` datetime DEFAULT CURRENT_TIMESTAMP,
   `longitude` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `latitude` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `cloture` tinyint NOT NULL DEFAULT '0',
+  `date_cloture` datetime DEFAULT NULL,
   `id_Utilisateur` int NOT NULL,
-  `id_Type` int NOT NULL,
+  `id_Type` int NOT NULL DEFAULT '1',
   `id_Status` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `Alerte_Utilisateur_FK` (`id_Utilisateur`),
@@ -51,20 +54,27 @@ CREATE TABLE IF NOT EXISTS `alerte` (
   CONSTRAINT `Alerte_Status1_FK` FOREIGN KEY (`id_Status`) REFERENCES `status` (`id`),
   CONSTRAINT `Alerte_Type0_FK` FOREIGN KEY (`id_Type`) REFERENCES `type` (`id`),
   CONSTRAINT `Alerte_Utilisateur_FK` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table maelou. checker
 DROP TABLE IF EXISTS `checker`;
 CREATE TABLE IF NOT EXISTS `checker` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date_action` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_Alerte` int NOT NULL,
   `id_Admin` int NOT NULL,
-  PRIMARY KEY (`id`,`id_Admin`),
+  `action` enum('SETSTATUS','SETFINISH') COLLATE utf8mb4_general_ci NOT NULL,
+  `value` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
   KEY `checker_Admin0_FK` (`id_Admin`),
+  KEY `FK_checker_status` (`value`),
+  KEY `FK_cheker_alerte` (`id_Alerte`) USING BTREE,
   CONSTRAINT `checker_Admin0_FK` FOREIGN KEY (`id_Admin`) REFERENCES `admin` (`id`),
-  CONSTRAINT `checker_Alerte_FK` FOREIGN KEY (`id`) REFERENCES `alerte` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `checker_Alerte_FK` FOREIGN KEY (`id_Alerte`) REFERENCES `alerte` (`id`),
+  CONSTRAINT `FK_checker_status` FOREIGN KEY (`value`) REFERENCES `status` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -74,9 +84,15 @@ CREATE TABLE IF NOT EXISTS `status` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Les données exportées n'étaient pas sélectionnées.
+-- Listage des données de la table maelou.status : ~0 rows (environ)
+INSERT INTO `status` (`id`, `nom`) VALUES
+	(1, 'NOUVEAU'),
+	(2, 'PRISE'),
+	(3, 'EN PROGRES'),
+	(4, 'EN ATTENTE'),
+	(5, 'TERMINE');
 
 -- Listage de la structure de table maelou. type
 DROP TABLE IF EXISTS `type`;
