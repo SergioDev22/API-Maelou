@@ -91,4 +91,28 @@ module.exports = {
       );
     });
   },
+
+  getAlertPerUser: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `
+            SELECT  a.id, a.date_post, a.longitude, a.latitude, a.id_Type,
+            t.nom as nom_Type, a.id_Status , s.nom as nom_Status , a.cloture, a.date_cloture
+            FROM Utilisateur u
+            INNER JOIN Alerte a
+            ON u.id = a.id_Utilisateur
+            INNER JOIN Type t 
+            ON a.id_Type = t.id
+            INNER JOIN Status s
+            ON a.id_Status = s.id
+            WHERE u.id = ?
+        `,
+        [id],
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result);
+        }
+      );
+    });
+  },
 };

@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const alerteModel = require("../models/alert");
 
 module.exports = {
@@ -182,5 +183,41 @@ module.exports = {
           message: `Error updating Alert for Alert ${id}`,
         });
       });
+  },
+
+  getAlerPerUser: (req, res) => {
+    const id = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.JWT_SECRET
+    ).userId;
+
+    alerteModel
+      .getAlertPerUser(id)
+      .then((results) => {
+        let alerts = [];
+        for (result of results) {
+          alerts.push({
+            id: result.id,
+            content: {
+              date_post: result.date_post,
+              longitude: result.longitude,
+              latitude: result.latitude,
+            },
+            type_Alert: { id: result.id_Type, nom: result.nom_Type },
+            status_Alert: { id: result.id_Status, nom: result.nom_Status },
+            closed: {
+              isClosed: result.cloture === 1 ? true : false,
+              date_closed: result.date_cloture,
+            },
+          });
+        }
+        res.status(200).send(alerts);
+      })
+      .catch((err) =>
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving alerts.",
+        })
+      );
   },
 };

@@ -62,7 +62,8 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
           "id": <id>,
           "nom": <nom du type d'alerte>,
           "description": <description de ce type>
-        }
+        },
+        ...
     ]
   ```
 
@@ -221,8 +222,8 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 
 - <details>
   <summary>Request</summary>
-  
-  *id_Type* : Type d'alerte dans utilitaire
+
+  _id_Type_ : Type d'alerte dans utilitaire
 
   ```http
   POST <host>:<port>/api/v1/alert
@@ -246,6 +247,72 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
       "id": <id de l'alerte dans bdd>,
       "message": "Alert sended succesfuly!"
     }
+  ```
+
+    </details>
+
+  </details>
+
+<details>
+<summary> Historique ou suivi de mes alertes </summary>
+
+- <details>
+  <summary>Request</summary>
+
+  ```http
+  GET <host>:<port>/api/v1/alert/my-alert
+  Authorization: Bearer <token>
+  ```
+
+  </details>
+
+- <details>
+    <summary>Response (200)</summary>
+
+  ```json
+  [
+    {
+      "id": <id_alerte>,
+      "content": {
+        "date_post": <date_post>,
+        "longitude": <longitude>,
+        "latitude": <latitude>
+      },
+      "type_Alert": {
+        "id": <id_Type_alerte>,
+        "nom": <son_nom>
+      },
+      "status_Alert": {
+        "id": <id_Status_alerte>,
+        "nom": <son_nom>
+      },
+      "closed": {
+        "isClosed": <true | false >,
+        "date_closed": <date_si_cloturé>
+      }
+    },
+    {
+      "id": <id_alerte>,
+      "content": {
+        "date_post": <date_post>,
+        "longitude": <longitude>,
+        "latitude": <latitude>
+      },
+      "type_Alert": {
+        "id": <id_Type_alerte>,
+        "nom": <son_nom>
+      },
+      "status_Alert": {
+        "id": <id_Status_alerte>,
+        "nom": <son_nom>
+      },
+      "closed": {
+        "isClosed": <true | false >,
+        "date_closed": <date_si_cloturé>
+      }
+    },
+    ...
+  ]
   ```
 
     </details>
@@ -345,7 +412,7 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
 #### Alertes
 
 <details>
-<summary> Geter les alertes et leurs historiques  non términées </summary>
+<summary> Geter les alertes  non términées et leurs historiques </summary>
 
 - <details>
   <summary>Request</summary>
@@ -409,7 +476,8 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
           "id": <id_status_alerte>,
            "nom": <son_nom>
         }
-      }
+      },
+      ...
     ]
   ```
 

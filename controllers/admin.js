@@ -76,7 +76,6 @@ module.exports = {
         adminModel
           .register(data)
           .then((result) => {
-            console.log("result");
             res.status(201).send({
               message: "Admin registered successfully!",
               id: result.insertId,
@@ -109,8 +108,6 @@ module.exports = {
                 "Some error occurred while registering the Admin.",
             });
           });
-
-        console.log("sortie");
       }
     });
   },
