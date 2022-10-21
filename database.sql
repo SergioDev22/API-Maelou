@@ -32,8 +32,9 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `mot_de_passe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `isSuper` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Listage des données de la table maelou.admin : ~0 rows (environ)
 
 -- Listage de la structure de table maelou. alerte
 DROP TABLE IF EXISTS `alerte`;
@@ -48,14 +49,15 @@ CREATE TABLE IF NOT EXISTS `alerte` (
   `id_Type` int NOT NULL DEFAULT '1',
   `id_Status` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `Alerte_Utilisateur_FK` (`id_Utilisateur`),
-  KEY `Alerte_Type0_FK` (`id_Type`),
   KEY `Alerte_Status1_FK` (`id_Status`),
-  CONSTRAINT `Alerte_Status1_FK` FOREIGN KEY (`id_Status`) REFERENCES `status` (`id`),
-  CONSTRAINT `Alerte_Type0_FK` FOREIGN KEY (`id_Type`) REFERENCES `type` (`id`),
-  CONSTRAINT `Alerte_Utilisateur_FK` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `Alerte_Type0_FK` (`id_Type`),
+  KEY `Alerte_Utilisateur_FK` (`id_Utilisateur`),
+  CONSTRAINT `Alerte_Status1_FK` FOREIGN KEY (`id_Status`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Alerte_Type0_FK` FOREIGN KEY (`id_Type`) REFERENCES `type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Alerte_Utilisateur_FK` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Listage des données de la table maelou.alerte : ~0 rows (environ)
 
 -- Listage de la structure de table maelou. checker
 DROP TABLE IF EXISTS `checker`;
@@ -67,15 +69,15 @@ CREATE TABLE IF NOT EXISTS `checker` (
   `action` enum('SETSTATUS','SETFINISH') COLLATE utf8mb4_general_ci NOT NULL,
   `value` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
+  KEY `FK_cheker_alerte` (`id_Alerte`) USING BTREE,
   KEY `checker_Admin0_FK` (`id_Admin`),
   KEY `FK_checker_status` (`value`),
-  KEY `FK_cheker_alerte` (`id_Alerte`) USING BTREE,
-  CONSTRAINT `checker_Admin0_FK` FOREIGN KEY (`id_Admin`) REFERENCES `admin` (`id`),
-  CONSTRAINT `checker_Alerte_FK` FOREIGN KEY (`id_Alerte`) REFERENCES `alerte` (`id`),
-  CONSTRAINT `FK_checker_status` FOREIGN KEY (`value`) REFERENCES `status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `checker_Admin0_FK` FOREIGN KEY (`id_Admin`) REFERENCES `admin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `checker_Alerte_FK` FOREIGN KEY (`id_Alerte`) REFERENCES `alerte` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_checker_status` FOREIGN KEY (`value`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+-- Listage des données de la table maelou.checker : ~0 rows (environ)
 
 -- Listage de la structure de table maelou. status
 DROP TABLE IF EXISTS `status`;
@@ -102,7 +104,10 @@ CREATE TABLE IF NOT EXISTS `type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+-- Listage des données de la table maelou.type : ~2 rows (environ)
+INSERT INTO `type` (`id`, `nom`, `description`) VALUES
+	(1, 'SOS', 'Description SOS'),
+	(2, 'AIDE', 'Besion d\'aide');
 
 -- Listage de la structure de table maelou. utilisateur
 DROP TABLE IF EXISTS `utilisateur`;
@@ -113,11 +118,13 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `cin` varchar(14) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `facebook` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `adresse` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `nom_utilisateur` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `numero_telephone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `mot_de_passe` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `pdcUrl` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Listage des données de la table maelou.utilisateur : ~0 rows (environ)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
