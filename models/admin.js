@@ -4,38 +4,39 @@ module.exports = {
   register: (data) => {
     return new Promise((resolve, reject) => {
       db.query(
-        ` 
-            INSERT INTO Utilisateur (nom, prenom, cin,
-            facebook, adresse, nom_utilisateur, mot_de_passe, pdcUrl)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `
+            INSERT INTO Admin (nom, prenom, grade, poste, nom_utilisateur, mot_de_passe,isSuper)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         `,
         [
           data.nom,
           data.prenom,
-          data.cin,
-          data.facebook,
-          data.adresse,
+          data.grade,
+          data.poste,
           data.nom_utilisateur,
           data.mot_de_passe,
-          data.pdcUrl,
+          data.isSuper,
         ],
         (err, result) => {
-          if (err) reject(err);
+          if (err) {
+            reject(err);
+          }
           resolve(result);
         }
       );
     });
   },
-
-  login: (nom_utilisateur) => {
+  login: (data) => {
     return new Promise((resolve, reject) => {
       db.query(
-        ` 
-          SELECT * FROM Utilisateur WHERE nom_utilisateur = ?
+        `
+            SELECT * FROM Admin WHERE nom_utilisateur = ?
         `,
-        [nom_utilisateur],
+        [data.nom_utilisateur],
         (err, result) => {
-          if (err) reject(err);
+          if (err) {
+            reject(err);
+          }
           resolve(result);
         }
       );
