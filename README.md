@@ -1,6 +1,6 @@
 # API-Maelou
 
-Ce sont des APIs pour l'application Maelou
+Ce sont des APIs pour l'application Maelou qui est dans ce lien https://github.com/diamondrarktvo/maelou
 
 ## INSTALLATION
 
