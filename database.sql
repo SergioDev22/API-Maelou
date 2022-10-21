@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `grade` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `poste` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `nom_utilisateur` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `mdp` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `mot_de_passe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `isSuper` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table maelou. alerte
 DROP TABLE IF EXISTS `alerte`;
@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `alerte` (
   CONSTRAINT `Alerte_Utilisateur_FK` FOREIGN KEY (`id_Utilisateur`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table maelou. checker
 DROP TABLE IF EXISTS `checker`;
@@ -76,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `checker` (
   CONSTRAINT `FK_checker_status` FOREIGN KEY (`value`) REFERENCES `status` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Les données exportées n'étaient pas sélectionnées.
+
 
 -- Listage de la structure de table maelou. status
 DROP TABLE IF EXISTS `status`;
@@ -86,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Listage des données de la table maelou.status : ~0 rows (environ)
+-- Listage des données de la table maelou.status : ~5 rows (environ)
 INSERT INTO `status` (`id`, `nom`) VALUES
 	(1, 'NOUVEAU'),
 	(2, 'PRISE'),
@@ -103,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Les données exportées n'étaient pas sélectionnées.
+
 
 -- Listage de la structure de table maelou. utilisateur
 DROP TABLE IF EXISTS `utilisateur`;
@@ -116,10 +115,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `adresse` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `nom_utilisateur` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `mot_de_passe` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `pdcUrl` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Les données exportées n'étaient pas sélectionnées.
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
