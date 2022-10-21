@@ -16,7 +16,7 @@ module.exports = {
           prenom: "required",
           facebook: "required",
           adresse: "required",
-          nom_utilisateur: "required",
+          numero_telephone: "required",
           mot_de_passe: "required",
         },
       });
@@ -30,7 +30,7 @@ module.exports = {
       "prenom",
       "facebook",
       "adresse",
-      "nom_utilisateur",
+      "numero_telephone",
       "mot_de_passe",
     ];
 
@@ -85,7 +85,7 @@ module.exports = {
                 adresse: data.adresse,
                 token: generateToken({
                   userId: result.insertId,
-                  userName: data.nom_utilisateur,
+                  userNumber: data.numero_telephone,
                 }),
               },
             });
@@ -108,7 +108,7 @@ module.exports = {
       res.status(400).send({
         message: "Content can not be empty!",
         attributs: {
-          nom_utilisateur: "required",
+          numero_telephone: "required",
           mot_de_passe: "required",
         },
       });
@@ -117,7 +117,7 @@ module.exports = {
 
     // Déclarer les champs obligatoires afin de controller
     // si ils sont bien remplis
-    const required_attributs = ["nom_utilisateur", "mot_de_passe"];
+    const required_attributs = ["numero_telephone", "mot_de_passe"];
 
     // Annoncer les attributs qui ne sont pas remplis
     for (let i = 0; i < required_attributs.length; i++) {
@@ -137,7 +137,7 @@ module.exports = {
 
     // Chercher l'utilisateur dans la base de données
     userModel
-      .login(data.nom_utilisateur)
+      .login(data.numero_telephone)
       .then((result) => {
         if (result.length > 0) {
           // Comparer le mot de passe entré avec celui de la base de données
@@ -163,7 +163,7 @@ module.exports = {
                     adresse: result[0].adresse,
                     token: generateToken({
                       userId: result[0].id,
-                      userName: result[0].nom_utilisateur,
+                      userNumber: result[0].numero_telephone,
                     }),
                   },
                 });
@@ -176,7 +176,7 @@ module.exports = {
           );
         } else {
           res.status(404).send({
-            message: `User not found with username "${data.nom_utilisateur}".`,
+            message: `User not found with phone number "${data.numero_telephone}".`,
           });
         }
       })

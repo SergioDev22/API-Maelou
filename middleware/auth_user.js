@@ -6,11 +6,11 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
-    const userName = decodedToken.userName;
+    const userNumber = decodedToken.userNumber;
 
     if (
       userId !== undefined &&
-      userName !== undefined &&
+      userNumber !== undefined &&
       isNaN(parseInt(userId)) === false
     ) {
       console.log("token success", token);
