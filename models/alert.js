@@ -61,7 +61,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         `
-            INSERT INTO checker
+            INSERT INTO Checker
             (id_Alerte, id_Admin, action, value)
             VALUES (?, ?, ?, ?)
         `,
