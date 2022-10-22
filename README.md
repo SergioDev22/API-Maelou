@@ -16,7 +16,8 @@ Ce sont des APIs pour l'application Maelou qui est dans ce lien https://github.c
 
 - #### Etape 3 :
 
-  Exporter le fichier `database.sql` pour créer la base de données dans votre propre logiciel de gestion de base de données comme `HeidiSQL`
+  Exporter le fichier `database.sql` pour créer la base de données dans votre propre logiciel de gestion de base de données.
+  **RECOMMANDE:** `HeidiSQL: https://www.heidisql.com/`
 
 - #### Etape 4 :
 
