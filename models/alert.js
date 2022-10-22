@@ -5,7 +5,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         `
-            INSERT INTO alerte (longitude, latitude, id_Utilisateur)
+            INSERT INTO Alerte (longitude, latitude, id_Utilisateur)
             VALUES (${data.longitude}, ${data.latitude}, ${data.id_Utilisateur});
         `,
         (err, result) => {
@@ -23,8 +23,8 @@ module.exports = {
             SELECT  u.id, u.nom,u.prenom, u.cin, u.facebook, u.adresse ,
             a.id, a.date_post, a.longitude, a.latitude,a.id_Type, t.nom as nom_Type,
             a.id_Status , s.nom as nom_Status
-            FROM utilisateur u
-            INNER JOIN alerte a
+            FROM Utilisateur u
+            INNER JOIN Alerte a
             ON u.id = a.id_Utilisateur
             INNER JOIN Type t 
             ON a.id_Type = t.id
@@ -44,7 +44,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         `
-            UPDATE alerte
+            UPDATE Alerte
             SET id_Status = ?
             WHERE id = ?
         `,
@@ -78,7 +78,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         `
-            UPDATE alerte
+            UPDATE Alerte
             SET cloture = 1 , date_cloture = NOW()
             WHERE id = ?
         `,
@@ -97,8 +97,8 @@ module.exports = {
         `
             SELECT  a.id, a.date_post, a.longitude, a.latitude, a.id_Type,
             t.nom as nom_Type, a.id_Status , s.nom as nom_Status , a.cloture, a.date_cloture
-            FROM utilisateur u
-            INNER JOIN alerte a
+            FROM Utilisateur u
+            INNER JOIN Alerte a
             ON u.id = a.id_Utilisateur
             INNER JOIN Type t 
             ON a.id_Type = t.id

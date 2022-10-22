@@ -5,7 +5,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         ` 
-            INSERT INTO utilisateur (nom, prenom, cin,
+            INSERT INTO Utilisateur (nom, prenom, cin,
             facebook, adresse, numero_telephone, mot_de_passe, pdcUrl)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `,
@@ -31,7 +31,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         ` 
-          SELECT * FROM utilisateur WHERE numero_telephone = ?
+          SELECT * FROM Utilisateur WHERE numero_telephone = ?
         `,
         [numero_telephone],
         (err, result) => {
