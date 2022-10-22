@@ -5,8 +5,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.query(
         `
-            INSERT INTO Alerte (longitude, latitude, id_Utilisateur)
-            VALUES (${data.longitude}, ${data.latitude}, ${data.id_Utilisateur});
+            INSERT INTO Alerte (longitude, latitude, id_Utilisateur, id_Type)
+            VALUES (${data.longitude}, ${data.latitude}, ${data.id_Utilisateur},${data.id_Type});
         `,
         (err, result) => {
           if (err) reject(err);
