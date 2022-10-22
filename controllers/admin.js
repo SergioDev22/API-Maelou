@@ -74,7 +74,11 @@ module.exports = {
         // Enregistrer l'utilisateur dans la base de données
         data.mot_de_passe = hash;
         adminModel
-          .register(data)
+          .register({
+            ...data,
+            isSuper:
+              data.isSuper !== undefined && data.isSuper === true ? 1 : 0,
+          })
           .then((result) => {
             res.status(201).send({
               message: "Admin registered successfully!",
@@ -86,8 +90,8 @@ module.exports = {
                 poste: data.poste,
                 nom_utilisateur: data.nom_utilisateur,
                 isSuper:
-                  data.isSuper !== undefined && data.isSuper === 1
-                    ? true
+                  data.isSuper !== undefined && data.isSuper === true
+                    ? data.isSuper
                     : false,
               },
               token: generateToken({
