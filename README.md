@@ -232,7 +232,8 @@ Ce sont les routes pour les utils nécessaires afin de faire jouer avec les util
   {
     "longitude": string | required,
     "latitude": string | required,
-    "id_Utilisateur": number | required
+    "id_Utilisateur": number | required,
+    "id_Type" : number | required
   }
 
   ```
