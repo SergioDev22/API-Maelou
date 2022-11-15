@@ -12,7 +12,7 @@ Ce sont des APIs pour l'application Maelou qui est dans ce lien https://github.c
 - #### Etape 2 :
 
   Installer alors les dépandances nécessaires
-  `yarn install`
+  `npm install`
 
 - #### Etape 3 :
 
